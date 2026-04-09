@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tim Huynh — Senior Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #161616;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8e6df;
+    --muted: #6b6860;
+    --accent: #c8ff3e;
+    --accent2: rgba(200,255,62,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--text); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+
+  h1 .dim { color: var(--muted); }
+
+  .hero-desc {
+    max-width: 540px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    color: var(--text);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-accent {
+    background: var(--accent);
+    color: #0a0a0a;
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+
+  .btn-accent:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    writing-mode: vertical-rl;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 3rem;
+    background: var(--muted);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(0.5); }
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* ── ABOUT ── */
+  #about { border-top: 1px solid var(--border); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+
+  .about-stats {
+    display: grid;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .stat {
+    background: var(--bg);
+    padding: 1.5rem 2rem;
+    transition: background 0.2s;
+  }
+
+  .stat:hover { background: var(--bg3); }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { border-top: 1px solid var(--border); }
+
+  .exp-list { display: flex; flex-direction: column; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-item:hover .exp-company { color: var(--accent); }
+
+  .exp-meta { padding-top: 0.15rem; }
+
+  .exp-company {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    transition: color 0.2s;
+  }
+
+  .exp-period {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .exp-desc {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+  }
+
+  /* ── SKILLS ── */
+  #skills { border-top: 1px solid var(--border); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .skill-group {
+    background: var(--bg);
+    padding: 2rem;
+    transition: background 0.2s;
+  }
+
+  .skill-group:hover { background: var(--bg3); }
+
+  .skill-group-title {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .skill-list li {
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .skill-list li::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: var(--muted);
+    flex-shrink: 0;
+  }
+
+  /* ── CONTACT ── */
+  #contact { border-top: 1px solid var(--border); }
+
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .contact-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-heading .accent { color: var(--accent); }
+
+  .contact-desc {
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-end;
+  }
+
+  .contact-link {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover { color: var(--accent); }
+
+  .contact-link::before {
+    content: '→';
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── FADE-IN ON SCROLL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── HERO ENTRANCE ── */
+  .hero-tag { animation: fadeUp 0.6s ease 0.2s both; }
+  h1 { animation: fadeUp 0.6s ease 0.35s both; }
+  .hero-desc { animation: fadeUp 0.6s ease 0.5s both; }
+  .hero-links { animation: fadeUp 0.6s ease 0.65s both; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1.25rem 1.5rem; }
+    nav ul { gap: 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-links { align-items: flex-start; }
+    .hero-scroll { display: none; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">TH<span>.</span></a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://github.com/timhuynh94" target="_blank" rel="noopener" style="color: var(--accent);">GitHub ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag">Available for opportunities</div>
+  <h1>Tim<br><span class="dim">Huynh</span></h1>
+  <p class="hero-desc">
+    Backend-focused Software Engineer with 7+ years building scalable systems,
+    APIs, and developer platforms. Specialized in Golang, distributed systems,
+    and automation — currently shaping CI/CD infrastructure at Target.
+  </p>
+  <div class="hero-links">
+    <a href="#experience" class="btn btn-accent">View my work</a>
+    <a href="#contact" class="btn">Get in touch</a>
+    <a href="https://github.com/timhuynh94" target="_blank" rel="noopener" class="btn">GitHub ↗</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">About</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2>Building systems that<br>don't break at 3am.</h2>
+      <p>
+        I'm a Senior Software Engineer based in Maple Grove, MN, focused on
+        backend development, infrastructure automation, and developer experience.
+      </p>
+      <p>
+        At Target, I contribute to Go-Vela — an open-source enterprise CI/CD
+        platform — while embedding reliability, observability, and self-healing
+        across Target's broader engineering ecosystem.
+      </p>
+      <p>
+        I hold a B.A. in Computer Science from the University of St. Thomas and
+        bring hands-on experience from SRE, network engineering, and data
+        platform roles.
+      </p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat">
+        <div class="stat-num">7+</div>
+        <div class="stat-label">Years of engineering experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">F50</div>
+        <div class="stat-label">Fortune 50 platform reliability at Target</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">10x</div>
+        <div class="stat-label">Test coverage scale (&lt;50 → 500+ cases)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">OSS</div>
+        <div class="stat-label">Open source contributor — go-vela</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label reveal">Experience</div>
+  <div class="exp-list">
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-company">Target</div>
+        <div class="exp-period">Oct 2022 – Present</div>
+      </div>
+      <div>
+        <div class="exp-role">Sr. Software Engineer</div>
+        <div class="exp-desc">
+          Develop and maintain Target's open-source CI/CD platform (Go-Vela) in Golang.
+          Design scalable automation for build orchestration, artifact storage, and test
+          reporting across distributed systems. Implement observability and self-healing
+          mechanisms to ensure platform resilience and uptime.
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Golang</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Docker</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Prometheus</span>
+          <span class="tag">Grafana</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-company">Lowe's</div>
+        <div class="exp-period">Apr 2022 – Oct 2022</div>
+      </div>
+      <div>
+        <div class="exp-role">Senior Software Engineer</div>
+        <div class="exp-desc">
+          Architected and deployed Apache Airflow clusters on Kubernetes, enabling
+          self-service ETL orchestration. Implemented centralized logging and metrics
+          pipelines with Prometheus and Grafana, enhancing workflow visibility.
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Apache Airflow</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Prometheus</span>
+          <span class="tag">Grafana</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-company">Target</div>
+        <div class="exp-period">May 2020 – Apr 2022</div>
+      </div>
+      <div>
+        <div class="exp-role">Network Software Engineer</div>
+        <div class="exp-desc">
+          Scaled a custom Network OS test suite from &lt;50 to 500+ Golang and Python
+          test cases — a 10x increase in coverage that accelerated regression cycles.
+          Developed a robust Python integration layer with atomic rollback and idempotent
+          operations, eliminating configuration drift across environments.
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Golang</span>
+          <span class="tag">Python</span>
+          <span class="tag">NetBox</span>
+          <span class="tag">Test Automation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-company">Target</div>
+        <div class="exp-period">Sep 2018 – May 2020</div>
+      </div>
+      <div>
+        <div class="exp-role">Site Reliability Engineer</div>
+        <div class="exp-desc">
+          Engineered resilient systems supporting critical supply chain and merchandising
+          operations. Automated incident triage and recovery workflows using Python,
+          reducing manual toil by 40%. Resolved 1,000+ production incidents in 2019.
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Incident Management</span>
+          <span class="tag">Observability</span>
+          <span class="tag">SRE</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-company">EVINE Live</div>
+        <div class="exp-period">May 2017 – Sep 2018</div>
+      </div>
+      <div>
+        <div class="exp-role">IT Business Analyst</div>
+        <div class="exp-desc">
+          Planning, design, and implementation of key systems in a high-availability
+          environment. Integrated system applications for end users, monitored
+          performance, and participated in 24x7 on-call support.
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Systems Integration</span>
+          <span class="tag">On-Call</span>
+          <span class="tag">High Availability</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="border-top: 1px solid var(--border);">
+  <div class="section-label reveal">Side Projects</div>
+
+  <!-- Fitness AI Agent — full width with live demo -->
+  <div style="border: 1px solid var(--border2); margin-bottom: 1px;" class="reveal">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; min-height: 520px;">
+
+      <!-- Left: description -->
+      <div style="padding: 2.5rem; border-right: 1px solid var(--border);">
+        <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;">2026 – Present</div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; letter-spacing: -0.01em;">Fitness Intelligence Agent</div>
+        <p style="color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 1.25rem;">
+          A multi-phase agentic AI system using LangChain and a self-hosted Ollama instance
+          (llama3.1:8b) for natural-language coaching over personal fitness data. Features a
+          two-track RAG architecture — SQLite-backed verified summaries for numerical queries
+          and ChromaDB vector store for narrative retrieval — with a hallucination guard layer
+          validating outputs against source data.
+        </p>
+        <p style="color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 1.5rem;">
+          Full SRE monitoring stack deployed on a self-hosted Linux server: Prometheus, Grafana,
+          Node Exporter, NVIDIA GPU Exporter, and Alertmanager with systemd-automated LLM query
+          scheduling.
+        </p>
+        <div class="exp-tags" style="margin-bottom: 1.5rem;">
+          <span class="tag">Python</span>
+          <span class="tag">LangChain</span>
+          <span class="tag">Ollama</span>
+          <span class="tag">ChromaDB</span>
+          <span class="tag">Flask</span>
+          <span class="tag">Prometheus</span>
+          <span class="tag">Grafana</span>
+        </div>
+        <a href="https://github.com/timhuynh94" target="_blank" rel="noopener"
+           style="font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.05em; border: 1px solid var(--border2); padding: 0.5rem 1rem; transition: all 0.2s; display: inline-block;"
+           onmouseenter="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'"
+           onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border2)'">
+          github.com/timhuynh94 ↗
+        </a>
+      </div>
+
+      <!-- Right: live demo chat -->
+      <div style="padding: 2rem; display: flex; flex-direction: column; background: var(--bg2);">
+        <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; animation: pulse 2s infinite;"></span>
+          Live demo — simulated agent
+        </div>
+        <div id="chat-messages" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; min-height: 280px; max-height: 320px; padding-right: 0.25rem;">
+          <div class="agent-bubble" style="align-self: flex-start; background: var(--bg3); border: 1px solid var(--border); padding: 0.75rem 1rem; font-size: 12px; color: var(--text); line-height: 1.6; max-width: 90%;">
+            Hey! I'm your Fitness Intelligence Agent. Ask me about workout planning, recovery, progressive overload, or training analysis. What are you working on?
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <input id="chat-input" type="text" placeholder="Ask about training, recovery, nutrition..."
+            style="flex: 1; background: var(--bg3); border: 1px solid var(--border2); color: var(--text); padding: 0.65rem 1rem; font-family: 'DM Mono', monospace; font-size: 12px; outline: none;"
+            onkeydown="if(event.key==='Enter') sendChat()"
+            onfocus="this.style.borderColor='var(--accent)'"
+            onblur="this.style.borderColor='var(--border2)'" />
+          <button onclick="sendChat()" id="send-btn"
+            style="background: var(--accent); color: #0a0a0a; border: none; padding: 0.65rem 1.25rem; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; cursor: pointer; transition: opacity 0.2s; white-space: nowrap;"
+            onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">
+            Send
+          </button>
+        </div>
+        <div style="margin-top: 0.75rem; font-size: 10px; color: var(--muted); letter-spacing: 0.04em;">
+          Simulated demo — no personal data used
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Domain Knowledge Graph -->
+  <div style="border: 1px solid var(--border); padding: 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start;" class="reveal">
+    <div>
+      <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;">2026 – Present</div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; letter-spacing: -0.01em;">Domain Knowledge Graph System</div>
+      <p style="color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 1.25rem;">
+        A generic self-organizing knowledge system using domain graph architecture on top of a
+        self-hosted Ollama instance. Extends RAG patterns toward domain-agnostic applications
+        including codebases and operational runbooks.
+      </p>
+      <div class="exp-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Ollama</span>
+        <span class="tag">Graph Architecture</span>
+        <span class="tag">RAG</span>
+      </div>
+    </div>
+    <a href="https://github.com/timhuynh94" target="_blank" rel="noopener"
+       style="font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.05em; border: 1px solid var(--border2); padding: 0.5rem 1rem; transition: all 0.2s; display: inline-block; white-space: nowrap; margin-top: 2.5rem;"
+       onmouseenter="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'"
+       onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border2)'">
+      View on GitHub ↗
+    </a>
+  </div>
+
+</section>
+
+<style>
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+#chat-messages::-webkit-scrollbar { width: 3px; }
+#chat-messages::-webkit-scrollbar-track { background: transparent; }
+#chat-messages::-webkit-scrollbar-thumb { background: var(--border2); }
+</style>
+
+<script>
+const chatHistory = [];
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const messages = document.getElementById('chat-messages');
+  const btn = document.getElementById('send-btn');
+  const text = input.value.trim();
+  if (!text || btn.disabled) return;
+
+  input.value = '';
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+
+  const userBubble = document.createElement('div');
+  userBubble.style.cssText = 'align-self: flex-end; background: rgba(200,255,62,0.1); border: 1px solid rgba(200,255,62,0.2); padding: 0.75rem 1rem; font-size: 12px; color: var(--text); line-height: 1.6; max-width: 85%;';
+  userBubble.textContent = text;
+  messages.appendChild(userBubble);
+
+  const typingBubble = document.createElement('div');
+  typingBubble.style.cssText = 'align-self: flex-start; background: var(--bg3); border: 1px solid var(--border); padding: 0.75rem 1rem; font-size: 12px; color: var(--muted); line-height: 1.6; max-width: 90%;';
+  typingBubble.textContent = '···';
+  messages.appendChild(typingBubble);
+  messages.scrollTop = messages.scrollHeight;
+
+  chatHistory.push({ role: 'user', content: text });
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `You are the Fitness Intelligence Agent — a personal AI coaching assistant built by Tim Huynh. You are running as a live demo on his portfolio website to showcase the project.
+
+Personality: sharp, data-driven, direct. Speak like a coach who knows the science. Keep replies concise — 2-4 sentences unless detail is genuinely needed. Be specific and actionable.
+
+Capabilities (simulate convincingly):
+- Analyze workout data and progressive overload trends
+- Periodization advice: hypertrophy, strength, endurance phases
+- Recovery, sleep, HRV, and readiness scores
+- Macro and nutrition strategies for training goals
+- Plateau detection and deload protocols
+
+Tech stack (if asked): LangChain + self-hosted Ollama (llama3.1:8b), two-track RAG with SQLite for numerical queries and ChromaDB for narrative retrieval, hallucination guard layer that validates outputs against source data, Flask API backend, Prometheus + Grafana monitoring stack on a self-hosted Linux server.
+
+Stay in character. Be impressive — you're showcasing what Tim built.`,
+        messages: chatHistory
+      })
+    });
+
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Something went wrong — try again.';
+    chatHistory.push({ role: 'assistant', content: reply });
+    typingBubble.style.color = 'var(--text)';
+    typingBubble.textContent = reply;
+  } catch (e) {
+    typingBubble.textContent = 'Connection error — please try again.';
+  }
+
+  btn.disabled = false;
+  btn.style.opacity = '1';
+  messages.scrollTop = messages.scrollHeight;
+}
+</script>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">Skills</div>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <ul class="skill-list">
+        <li>Golang</li>
+        <li>Python</li>
+        <li>Bash / Shell</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Infrastructure</div>
+      <ul class="skill-list">
+        <li>Kubernetes</li>
+        <li>Docker</li>
+        <li>Helm</li>
+        <li>Ansible</li>
+        <li>GitOps</li>
+        <li>Apache Airflow</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">CI/CD & APIs</div>
+      <ul class="skill-list">
+        <li>Go-Vela</li>
+        <li>GitHub Actions</li>
+        <li>gRPC</li>
+        <li>REST</li>
+        <li>Microservices</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Observability</div>
+      <ul class="skill-list">
+        <li>Prometheus</li>
+        <li>Grafana</li>
+        <li>SLO / SLI Definition</li>
+        <li>Alerting & Dashboards</li>
+        <li>Self-healing Systems</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">AI / ML</div>
+      <ul class="skill-list">
+        <li>LangChain</li>
+        <li>Ollama (self-hosted)</li>
+        <li>ChromaDB</li>
+        <li>RAG Architecture</li>
+        <li>Flask</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Education</div>
+      <ul class="skill-list">
+        <li>B.A. Computer Science</li>
+        <li>University of St. Thomas</li>
+        <li>Class of 2016</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">Contact</div>
+  <div class="contact-wrap">
+    <div class="reveal">
+      <div class="contact-heading">Let's build<br>something <span class="accent">reliable.</span></div>
+      <p class="contact-desc">
+        Open to backend, platform engineering, and SRE roles. If you're working
+        on distributed systems or developer tooling, I'd love to hear about it.
+      </p>
+      <a href="mailto:tim_huynh94@hotmail.com" class="btn btn-accent">tim_huynh94@hotmail.com</a>
+    </div>
+    <div class="contact-links reveal">
+      <a href="https://github.com/timhuynh94" class="contact-link" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/timhuynh94" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:tim_huynh94@hotmail.com" class="contact-link">Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Tim Huynh © 2025</span>
+  <span>Maple Grove, MN</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
