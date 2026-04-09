@@ -54,7 +54,6 @@ Then update your DNS provider to point to GitHub Pages (see [GitHub docs](https:
 ```
 /
 ├── index.html      # Everything — HTML, CSS, JS in one file
-├── CNAME           # Custom domain (add if needed)
 └── README.md
 ```
 
