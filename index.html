@@ -493,17 +493,55 @@
 
   /* ── MOBILE ── */
   @media (max-width: 768px) {
-    nav { padding: 1.25rem 1.5rem; }
-    nav ul { gap: 1.5rem; }
-    section { padding: 4rem 1.5rem; }
-    #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
-    .skills-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    nav ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(10,10,10,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+    nav ul.open { display: flex; }
+    nav ul li a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      font-size: 13px;
+    }
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      transition: all 0.2s;
+    }
+    section { padding: 3.5rem 1.25rem; }
+    #hero { padding-left: 1.25rem; padding-right: 1.25rem; padding-top: 6rem; }
+    .hero-links { flex-direction: column; gap: 0.75rem; }
+    .hero-links .btn { text-align: center; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
     .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
     .contact-links { align-items: flex-start; }
     .hero-scroll { display: none; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 3.5rem; }
   }
 </style>
 </head>
@@ -511,7 +549,10 @@
 
 <nav>
   <a href="#hero" class="nav-logo">TH<span>.</span></a>
-  <ul>
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Toggle menu" style="display:none;background:none;border:none;cursor:pointer;">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Work</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -563,6 +604,12 @@
 #chat-messages::-webkit-scrollbar { width: 3px; }
 #chat-messages::-webkit-scrollbar-track { background: transparent; }
 #chat-messages::-webkit-scrollbar-thumb { background: var(--border2); }
+
+@media (max-width: 768px) {
+  .project-demo-grid { grid-template-columns: 1fr !important; }
+  .project-demo-chat { border-left: none !important; border-top: 1px solid var(--border); }
+  .nav-hamburger { display: flex !important; }
+}
 </style>
 
 <script>
@@ -709,7 +756,7 @@ async function sendChat() {
     document.getElementById('projects-list').innerHTML = d.projects.map((p, i) => {
       if (p.demo) {
         return `<div style="border:1px solid var(--border2);margin-bottom:1px;" class="reveal">
-          <div style="display:grid;grid-template-columns:1fr 1fr;min-height:520px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;min-height:520px;" class="project-demo-grid">
             <div style="padding:2.5rem;border-right:1px solid var(--border);">
               <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">${p.period}</div>
               <div style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;letter-spacing:-0.01em;">${p.title}</div>
@@ -718,7 +765,7 @@ async function sendChat() {
               <div style="margin-bottom:1.5rem;">${tags(p.tags)}</div>
               ${ghLink(p.github, 'github.com/timhuynh94')}
             </div>
-            <div style="padding:2rem;display:flex;flex-direction:column;background:var(--bg2);">
+            <div class="project-demo-chat" style="padding:2rem;display:flex;flex-direction:column;background:var(--bg2);">
               <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">
                 <span style="width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
                 Live demo — powered by llama3.1:8b
@@ -784,6 +831,18 @@ async function sendChat() {
   }
 
   render().catch(console.error);
+
+  // Hamburger menu
+  const toggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll && document.addEventListener('click', e => {
+    if (!e.target.closest('nav')) navLinks.classList.remove('open');
+  });
+  // Close on link click
+  document.getElementById('nav-links').addEventListener('click', e => {
+    if (e.target.tagName === 'A') navLinks.classList.remove('open');
+  });
 </script>
 </body>
 </html>
