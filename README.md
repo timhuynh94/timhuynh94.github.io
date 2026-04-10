@@ -10,7 +10,7 @@ Hosted at: [thuynhportfolio.dev](https://thuynhportfolio.dev)
 
 - Dark minimal design with scroll-triggered animations
 - Fully responsive (mobile + desktop)
-- Interactive Fitness AI Agent demo (powered by Claude API)
+- Interactive Fitness AI Agent demo (powered by self-hosted llama3.1:8b via Ollama)
 - Sections: Hero, About, Experience, Projects, Skills, Contact
 
 ## Setup
@@ -24,13 +24,18 @@ cd timhuynh94.github.io
 
 ### 2. Configure the AI demo
 
-The Fitness Intelligence Agent demo calls the Anthropic API. To enable it locally, the API key is handled by the hosting environment — no key is embedded in the source.
+The Fitness Intelligence Agent demo calls a self-hosted backend at `api.thuynhportfolio.dev`, which proxies requests to a local Ollama instance running `llama3.1:8b`. The backend authenticates requests via a portfolio token in the `X-Portfolio-Token` header.
 
-If you fork this and want the demo to work in your own deployment, you'll need to proxy API calls through a serverless function (Vercel, Netlify Functions, Cloudflare Workers) that injects your key server-side.
+If you fork this and want the demo to work in your own deployment, you'll need to:
+- Run your own Ollama instance with a compatible model
+- Stand up a backend API that accepts `{ message, history }` and returns `{ data: { reply } }`
+- Update `CHAT_ENDPOINT` and `PORTFOLIO_TOKEN` in `index.html` to point to your backend
 
-> **Note:** Never hardcode an API key directly in client-side HTML — it will be publicly visible in the source.
+### 3. Customize content
 
-### 3. Deploy to GitHub Pages
+All portfolio content (name, experience, projects, skills, etc.) lives in `data.json`. Edit that file — no code changes needed.
+
+### 4. Deploy to GitHub Pages
 
 ```bash
 # In your repo settings:
@@ -39,7 +44,7 @@ If you fork this and want the demo to work in your own deployment, you'll need t
 
 Your site will be live at `https://<your-username>.github.io` within a few minutes.
 
-### 4. Custom domain (optional)
+### 5. Custom domain (optional)
 
 Add a `CNAME` file to the repo root with your domain:
 
@@ -54,7 +59,7 @@ Then update your DNS provider to point to GitHub Pages (see [GitHub docs](https:
 ```
 /
 ├── index.html      # Everything — HTML, CSS, JS in one file
-├── CNAME           # Custom domain (add if needed)
+├── data.json       # All portfolio content (edit this to update the site)
 └── README.md
 ```
 
@@ -62,4 +67,4 @@ Then update your DNS provider to point to GitHub Pages (see [GitHub docs](https:
 
 - HTML / CSS / JavaScript (no frameworks)
 - [Syne](https://fonts.google.com/specimen/Syne) + [DM Mono](https://fonts.google.com/specimen/DM+Mono) via Google Fonts
-- [Anthropic Claude API](https://docs.anthropic.com) for the AI demo
+- [Ollama](https://ollama.com) + llama3.1:8b for the self-hosted AI demo

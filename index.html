@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tim Huynh — Senior Software Engineer</title>
+<meta name="description" content="Portfolio of Tim Huynh — Senior Software Engineer specializing in Golang, distributed systems, CI/CD infrastructure, and developer platforms.">
+<meta property="og:title" content="Tim Huynh — Senior Software Engineer">
+<meta property="og:description" content="Backend-focused engineer with 7+ years building scalable systems, APIs, and developer platforms. Golang, distributed systems, and automation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thuynhportfolio.dev">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tim Huynh — Senior Software Engineer">
+<meta name="twitter:description" content="Backend-focused engineer with 7+ years building scalable systems, APIs, and developer platforms.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -662,7 +670,7 @@ async function sendChat() {
       typingBubble.textContent = reply;
     }
   } catch (e) {
-    typingBubble.textContent = "That\u2019s outside my lane \u2014 I\u2019m here to answer questions about Tim\u2019s experience, skills, and projects. Try asking: \u2018What has Tim built?\u2019 or \u2018How can I reach him?\u2019";
+    typingBubble.textContent = "Couldn\u2019t reach the server \u2014 the demo may be offline right now. Try again later, or check out the project on GitHub.";
   }
 
   btn.disabled = false;
@@ -824,7 +832,6 @@ async function sendChat() {
       <a href="mailto:${m.email}" class="contact-link">Email</a>`;
 
     // Footer
-    const [fname, ...lname] = m.name.split(' ');
     document.getElementById('footer-name').textContent = `${m.name} © ${m.year}`;
     document.getElementById('footer-location').textContent = m.location;
 
@@ -838,7 +845,7 @@ async function sendChat() {
   const toggle = document.getElementById('nav-toggle');
   const navLinks = document.getElementById('nav-links');
   toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll && document.addEventListener('click', e => {
+  document.addEventListener('click', e => {
     if (!e.target.closest('nav')) navLinks.classList.remove('open');
   });
   // Close on link click
