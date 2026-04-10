@@ -606,9 +606,11 @@
 #chat-messages::-webkit-scrollbar-thumb { background: var(--border2); }
 
 @media (max-width: 768px) {
-  .project-demo-grid { grid-template-columns: 1fr !important; }
+  .project-demo-grid { grid-template-columns: 1fr !important; min-height: auto !important; }
   .project-demo-chat { border-left: none !important; border-top: 1px solid var(--border); }
   .nav-hamburger { display: flex !important; }
+  .project-simple { grid-template-columns: 1fr !important; }
+  .project-simple-link { margin-top: 0 !important; }
 }
 </style>
 
@@ -650,7 +652,7 @@ async function sendChat() {
 
     if (!res.ok) {
       typingBubble.style.color = 'var(--muted)';
-      typingBubble.textContent = data.error || 'Something went wrong — try again.';
+      typingBubble.textContent = data.error || "That\u2019s outside my lane \u2014 try asking about Tim\u2019s experience, skills, or projects.";
     } else {
       const reply = data.data.reply;
       chatHistory.push({ role: 'user', content: text });
@@ -660,7 +662,7 @@ async function sendChat() {
       typingBubble.textContent = reply;
     }
   } catch (e) {
-    typingBubble.textContent = 'Connection error — is the server running?';
+    typingBubble.textContent = "That\u2019s outside my lane \u2014 I\u2019m here to answer questions about Tim\u2019s experience, skills, and projects. Try asking: \u2018What has Tim built?\u2019 or \u2018How can I reach him?\u2019";
   }
 
   btn.disabled = false;
@@ -792,14 +794,14 @@ async function sendChat() {
           </div>
         </div>`;
       } else {
-        return `<div style="border:1px solid var(--border);padding:2.5rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;" class="reveal">
+        return `<div style="border:1px solid var(--border);padding:2.5rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;" class="project-simple reveal">
           <div>
             <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">${p.period}</div>
             <div style="font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;letter-spacing:-0.01em;">${p.title}</div>
             <p style="color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:1.25rem;">${p.description}</p>
             ${tags(p.tags)}
           </div>
-          <div style="margin-top:2.5rem;">${ghLink(p.github, 'View on GitHub')}</div>
+          <div class="project-simple-link" style="margin-top:2.5rem;">${ghLink(p.github, 'View on GitHub')}</div>
         </div>`;
       }
     }).join('');
