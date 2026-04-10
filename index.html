@@ -18,15 +18,15 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #161616;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --text: #e8e6df;
-    --muted: #6b6860;
-    --accent: #c8ff3e;
-    --accent2: rgba(200,255,62,0.12);
+    --bg: #0c1018;
+    --bg2: #131a24;
+    --bg3: #1a2332;
+    --border: rgba(136,198,255,0.08);
+    --border2: rgba(136,198,255,0.15);
+    --text: #e2e8f0;
+    --muted: #8899aa;
+    --accent: #00d4ff;
+    --accent2: rgba(0,212,255,0.10);
   }
 
   html { scroll-behavior: smooth; }
@@ -61,7 +61,7 @@
     align-items: center;
     padding: 1.5rem 3rem;
     border-bottom: 1px solid var(--border);
-    background: rgba(10,10,10,0.85);
+    background: rgba(12,16,24,0.85);
     backdrop-filter: blur(12px);
   }
 
@@ -174,7 +174,7 @@
 
   .btn-accent {
     background: var(--accent);
-    color: #0a0a0a;
+    color: #0c1018;
     border-color: var(--accent);
     font-weight: 500;
   }
@@ -510,7 +510,7 @@
       right: 0;
       flex-direction: column;
       gap: 0;
-      background: rgba(10,10,10,0.97);
+      background: rgba(12,16,24,0.97);
       border-bottom: 1px solid var(--border);
       padding: 1rem 0;
     }
@@ -617,8 +617,6 @@
   .project-demo-grid { grid-template-columns: 1fr !important; min-height: auto !important; }
   .project-demo-chat { border-left: none !important; border-top: 1px solid var(--border); }
   .nav-hamburger { display: flex !important; }
-  .project-simple { grid-template-columns: 1fr !important; }
-  .project-simple-link { margin-top: 0 !important; }
 }
 </style>
 
@@ -639,7 +637,7 @@ async function sendChat() {
   btn.style.opacity = '0.5';
 
   const userBubble = document.createElement('div');
-  userBubble.style.cssText = 'align-self: flex-end; background: rgba(200,255,62,0.1); border: 1px solid rgba(200,255,62,0.2); padding: 0.75rem 1rem; font-size: 12px; color: var(--text); line-height: 1.6; max-width: 85%;';
+  userBubble.style.cssText = 'align-self: flex-end; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2); padding: 0.75rem 1rem; font-size: 12px; color: var(--text); line-height: 1.6; max-width: 85%;';
   userBubble.textContent = text;
   messages.appendChild(userBubble);
 
@@ -714,13 +712,6 @@ async function sendChat() {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
 
-  function ghLink(url, label) {
-    return `<a href="${url}" target="_blank" rel="noopener"
-      style="font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.05em;border:1px solid var(--border2);padding:0.5rem 1rem;transition:all 0.2s;display:inline-block;white-space:nowrap;"
-      onmouseenter="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'"
-      onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border2)'">${label} ↗</a>`;
-  }
-
   function tags(arr) {
     return `<div class="exp-tags">${arr.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
   }
@@ -772,8 +763,7 @@ async function sendChat() {
               <div style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;letter-spacing:-0.01em;">${p.title}</div>
               <p style="color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:1.25rem;">${p.description}</p>
               ${p.description2 ? `<p style="color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:1.5rem;">${p.description2}</p>` : ''}
-              <div style="margin-bottom:1.5rem;">${tags(p.tags)}</div>
-              ${ghLink(p.github, 'github.com/timhuynh94')}
+              <div>${tags(p.tags)}</div>
             </div>
             <div class="project-demo-chat" style="padding:2rem;display:flex;flex-direction:column;background:var(--bg2);">
               <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">
@@ -792,7 +782,7 @@ async function sendChat() {
                   onfocus="this.style.borderColor='var(--accent)'"
                   onblur="this.style.borderColor='var(--border2)'" />
                 <button onclick="sendChat()" id="send-btn"
-                  style="background:var(--accent);color:#0a0a0a;border:none;padding:0.65rem 1.25rem;font-family:'DM Mono',monospace;font-size:12px;font-weight:500;cursor:pointer;transition:opacity 0.2s;white-space:nowrap;"
+                  style="background:var(--accent);color:#0c1018;border:none;padding:0.65rem 1.25rem;font-family:'DM Mono',monospace;font-size:12px;font-weight:500;cursor:pointer;transition:opacity 0.2s;white-space:nowrap;"
                   onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">Send</button>
               </div>
               <div style="margin-top:0.75rem;font-size:10px;color:var(--muted);letter-spacing:0.04em;">
@@ -802,14 +792,13 @@ async function sendChat() {
           </div>
         </div>`;
       } else {
-        return `<div style="border:1px solid var(--border);padding:2.5rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;" class="project-simple reveal">
+        return `<div style="border:1px solid var(--border);padding:2.5rem;" class="reveal">
           <div>
             <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">${p.period}</div>
             <div style="font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;letter-spacing:-0.01em;">${p.title}</div>
             <p style="color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:1.25rem;">${p.description}</p>
             ${tags(p.tags)}
           </div>
-          <div class="project-simple-link" style="margin-top:2.5rem;">${ghLink(p.github, 'View on GitHub')}</div>
         </div>`;
       }
     }).join('');

@@ -74,7 +74,6 @@
       "description": "A multi-phase agentic AI system using LangChain and a self-hosted Ollama instance (llama3.1:8b) for natural-language coaching over personal fitness data. Features a two-track RAG architecture — SQLite-backed verified summaries for numerical queries and ChromaDB vector store for narrative retrieval — with a hallucination guard layer validating outputs against source data.",
       "description2": "Full SRE monitoring stack deployed on a self-hosted Linux server: Prometheus, Grafana, Node Exporter, NVIDIA GPU Exporter, and Alertmanager with systemd-automated LLM query scheduling.",
       "tags": ["Python", "LangChain", "Ollama", "ChromaDB", "Flask", "Prometheus", "Grafana"],
-      "github": "https://github.com/timhuynh94",
       "demo": true
     },
     {
@@ -83,7 +82,6 @@
       "description": "A generic self-organizing knowledge system using domain graph architecture on top of a self-hosted Ollama instance. Extends RAG patterns toward domain-agnostic applications including codebases and operational runbooks.",
       "description2": null,
       "tags": ["Python", "Ollama", "Graph Architecture", "RAG"],
-      "github": "https://github.com/timhuynh94",
       "demo": false
     }
   ],
