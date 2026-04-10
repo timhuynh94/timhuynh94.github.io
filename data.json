@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "name": "Tim Huynh",
+    "title": "Senior Software Engineer",
+    "subtitle": "Infra Automation & Dev Tools | Golang & Python | Internal Platforms",
+    "location": "Maple Grove, MN",
+    "email": "tim_huynh94@hotmail.com",
+    "github": "https://github.com/timhuynh94",
+    "linkedin": "https://linkedin.com/in/timhuynh94",
+    "available": true,
+    "availableText": "Available for opportunities",
+    "heroDesc": "Backend-focused Software Engineer with 7+ years building scalable systems, APIs, and developer platforms. Specialized in Golang, distributed systems, and automation — currently shaping CI/CD infrastructure at Target.",
+    "contactDesc": "Open to backend, platform engineering, and SRE roles. If you're working on distributed systems or developer tooling, I'd love to hear about it.",
+    "year": "2025"
+  },
+
+  "about": {
+    "heading": "Building systems that don't break at 3am.",
+    "paragraphs": [
+      "I'm a Senior Software Engineer based in Maple Grove, MN, focused on backend development, infrastructure automation, and developer experience.",
+      "At Target, I contribute to Go-Vela — an open-source enterprise CI/CD platform — while embedding reliability, observability, and self-healing across Target's broader engineering ecosystem.",
+      "I hold a B.A. in Computer Science from the University of St. Thomas and bring hands-on experience from SRE, network engineering, and data platform roles."
+    ],
+    "stats": [
+      { "value": "7+",  "label": "Years of engineering experience" },
+      { "value": "F50", "label": "Fortune 50 platform reliability at Target" },
+      { "value": "10x", "label": "Test coverage scale (<50 → 500+ cases)" },
+      { "value": "OSS", "label": "Open source contributor — go-vela" }
+    ]
+  },
+
+  "experience": [
+    {
+      "company": "Target",
+      "role": "Sr. Software Engineer",
+      "period": "Oct 2022 – Present",
+      "description": "Develop and maintain Target's open-source CI/CD platform (Go-Vela) in Golang. Design scalable automation for build orchestration, artifact storage, and test reporting across distributed systems. Implement observability and self-healing mechanisms to ensure platform resilience and uptime.",
+      "tags": ["Golang", "Kubernetes", "Docker", "GitHub Actions", "Prometheus", "Grafana"]
+    },
+    {
+      "company": "Lowe's",
+      "role": "Senior Software Engineer",
+      "period": "Apr 2022 – Oct 2022",
+      "description": "Architected and deployed Apache Airflow clusters on Kubernetes, enabling self-service ETL orchestration. Implemented centralized logging and metrics pipelines with Prometheus and Grafana, enhancing workflow visibility.",
+      "tags": ["Apache Airflow", "Kubernetes", "Prometheus", "Grafana"]
+    },
+    {
+      "company": "Target",
+      "role": "Network Software Engineer",
+      "period": "May 2020 – Apr 2022",
+      "description": "Scaled a custom Network OS test suite from <50 to 500+ Golang and Python test cases — a 10x increase in coverage that accelerated regression cycles. Developed a robust Python integration layer with atomic rollback and idempotent operations, eliminating configuration drift across environments.",
+      "tags": ["Golang", "Python", "NetBox", "Test Automation"]
+    },
+    {
+      "company": "Target",
+      "role": "Site Reliability Engineer",
+      "period": "Sep 2018 – May 2020",
+      "description": "Engineered resilient systems supporting critical supply chain and merchandising operations at a Fortune 50 retailer. Automated incident triage and recovery workflows using Python. Defined SLOs and SLIs for production services and implemented self-healing mechanisms.",
+      "tags": ["Python", "Incident Management", "Observability", "SRE"]
+    },
+    {
+      "company": "EVINE Live",
+      "role": "IT Business Analyst",
+      "period": "May 2017 – Sep 2018",
+      "description": "Planning, design, and implementation of key systems in a high-availability environment. Integrated system applications for end users, monitored performance, and participated in 24x7 on-call support.",
+      "tags": ["Systems Integration", "On-Call", "High Availability"]
+    }
+  ],
+
+  "projects": [
+    {
+      "title": "Fitness Intelligence Agent",
+      "period": "2026 – Present",
+      "description": "A multi-phase agentic AI system using LangChain and a self-hosted Ollama instance (llama3.1:8b) for natural-language coaching over personal fitness data. Features a two-track RAG architecture — SQLite-backed verified summaries for numerical queries and ChromaDB vector store for narrative retrieval — with a hallucination guard layer validating outputs against source data.",
+      "description2": "Full SRE monitoring stack deployed on a self-hosted Linux server: Prometheus, Grafana, Node Exporter, NVIDIA GPU Exporter, and Alertmanager with systemd-automated LLM query scheduling.",
+      "tags": ["Python", "LangChain", "Ollama", "ChromaDB", "Flask", "Prometheus", "Grafana"],
+      "github": "https://github.com/timhuynh94",
+      "demo": true
+    },
+    {
+      "title": "Domain Knowledge Graph System",
+      "period": "2026 – Present",
+      "description": "A generic self-organizing knowledge system using domain graph architecture on top of a self-hosted Ollama instance. Extends RAG patterns toward domain-agnostic applications including codebases and operational runbooks.",
+      "description2": null,
+      "tags": ["Python", "Ollama", "Graph Architecture", "RAG"],
+      "github": "https://github.com/timhuynh94",
+      "demo": false
+    }
+  ],
+
+  "skills": [
+    {
+      "group": "Languages",
+      "items": ["Golang", "Python", "Bash / Shell"]
+    },
+    {
+      "group": "Infrastructure",
+      "items": ["Kubernetes", "Docker", "Helm", "Ansible", "GitOps", "Apache Airflow"]
+    },
+    {
+      "group": "CI/CD & APIs",
+      "items": ["Go-Vela", "GitHub Actions", "gRPC", "REST", "Microservices"]
+    },
+    {
+      "group": "Observability",
+      "items": ["Prometheus", "Grafana", "SLO / SLI Definition", "Alerting & Dashboards", "Self-healing Systems"]
+    },
+    {
+      "group": "AI / ML",
+      "items": ["LangChain", "Ollama (self-hosted)", "ChromaDB", "RAG Architecture", "Flask"]
+    },
+    {
+      "group": "Education",
+      "items": ["B.A. Computer Science", "University of St. Thomas", "Class of 2016"]
+    }
+  ]
+}

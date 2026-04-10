@@ -4,7 +4,7 @@ Personal portfolio website. Built with vanilla HTML, CSS, and JavaScript. No fra
 
 ## Live Demo
 
-Hosted via GitHub Pages: [timhuynh94.github.io](https://timhuynh94.github.io)
+Hosted at: [thuynhportfolio.dev](https://thuynhportfolio.dev)
 
 ## Features
 
@@ -54,6 +54,7 @@ Then update your DNS provider to point to GitHub Pages (see [GitHub docs](https:
 ```
 /
 ├── index.html      # Everything — HTML, CSS, JS in one file
+├── CNAME           # Custom domain (add if needed)
 └── README.md
 ```
 
